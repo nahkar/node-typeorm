@@ -1,9 +1,8 @@
 import express = require('express');
 const app = express();
-import * as userController from './controllers/user.controller';
+import routes from './routes/v1';
 
 app.set('port', process.env.PORT || 8082);
-
-app.get('/', userController.getUser);
+app.use('/v1', routes);
 
 export default app;
