@@ -2,39 +2,25 @@ import 'reflect-metadata';
 import { createConnection } from 'typeorm';
 
 import { Photo } from './entity/Photo';
-import { Author } from './entity/Author';
+import { Album } from './entity/Album';
 
 createConnection()
   .then(async connection => {
-    // let photo = new Photo();
-    // photo.name = 'new photo2';
-    // photo.description = 'I am near polar bears';
-    // photo.filename = 'photo-with-bears.jpg';
-    // photo.isPublished = true;
-    // photo.views = 10;
+    let album1 = new Album();
+    album1.name = 'Bears';
+    await connection.manager.save(album1);
 
-    // let author = new Author();
-    // author.name = 'Smith';
+    let album2 = new Album();
+    album2.name = 'Me';
+    await connection.manager.save(album2);
 
-    // photo.author = author;
+    let photo = new Photo();
+    photo.name = 'Me and Bears';
+    photo.description = 'I am near polar bears';
+    photo.filename = 'photo-with-bears.jpg';
+    photo.albums = [album1, album2];
+    await connection.manager.save(photo);
 
-    // let photoRepository = connection.getRepository(Photo);
-    // await photoRepository.save(photo);
-
-    // let photos = await connection
-    //   .getRepository(Photo)
-    //   .createQueryBuilder('photo')
-    //   .innerJoinAndSelect('photo.author', 'author')
-    //   .getMany();
-
-    // console.warn(photos);
-
-    let authorRepository = connection.getRepository(Author);
-    let authors = await connection
-      .getRepository(Author)
-      .createQueryBuilder('author')
-      .getMany();
-
-    console.warn(authors);
+    const loadedPhoto = await connection.getRepository(Photo).find({ relations: ['albums'] });
   })
   .catch(error => console.log(error));
