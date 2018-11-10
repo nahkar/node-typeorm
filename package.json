@@ -10,7 +10,7 @@
     "type": "git",
     "url": "git+https://github.com/nahkar/node-typeorm.git"
   },
-  "author": "",
+  "author": "Belenov Dmitriy",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/nahkar/node-typeorm/issues"
