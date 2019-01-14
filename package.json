@@ -1,0 +1,30 @@
+{
+  "name": "node-typeorm",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.ts",
+  "scripts": {
+    "start": "nodemon --exec  ts-node src/index.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nahkar/node-typeorm.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nahkar/node-typeorm/issues"
+  },
+  "homepage": "https://github.com/nahkar/node-typeorm#readme",
+  "dependencies": {
+    "nodemon": "^1.18.9",
+    "pg": "^7.3.0",
+    "reflect-metadata": "^0.1.10",
+    "typeorm": "0.2.11"
+  },
+  "devDependencies": {
+    "@types/node": "^8.0.29",
+    "ts-node": "3.3.0",
+    "typescript": "2.5.2"
+  }
+}
