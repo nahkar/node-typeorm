@@ -1,26 +1,30 @@
 import 'reflect-metadata';
 import { createConnection } from 'typeorm';
+
 import { Photo } from './entity/Photo';
+import { PhotoMetadata } from './entity/PhotoMetadata';
 
 createConnection()
   .then(async connection => {
-    console.log('Inserting a new user into the database...');
-    const photo = new Photo();
-    photo.name = 'Timber';
-    photo.description = 'Saw';
-    photo.filename = 'pic_001';
-    photo.views = 1;
+    let photo = new Photo();
+    photo.name = 'Me and Bears';
+    photo.description = 'I am near polar bears';
+    photo.filename = 'photo-with-bears.jpg';
     photo.isPublished = true;
+    photo.views = 10;
+
+    let metadata = new PhotoMetadata();
+    metadata.height = 640;
+    metadata.width = 480;
+    metadata.compressed = true;
+    metadata.comment = 'cybershoot';
+    metadata.orientation = 'portait';
+    metadata.photo = photo;
 
     let photoRepository = connection.getRepository(Photo);
+    let metadataRepository = connection.getRepository(PhotoMetadata);
 
     await photoRepository.save(photo);
-    console.log('Saved a new photo with id: ' + photo.id);
-
-    console.log('Loading photos from the database...');
-    const photos = await photoRepository.find();
-    console.log('Loaded photos: ', photos);
-
-    console.log('Here you can setup and run express/koa/any other framework.');
+    await metadataRepository.save(metadata);
   })
   .catch(error => console.log(error));
