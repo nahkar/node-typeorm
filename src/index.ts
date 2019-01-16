@@ -5,7 +5,10 @@ import { Photo } from './entity/Photo';
 
 createConnection()
   .then(async connection => {
-    let photoRepository = connection.getRepository(Photo);
-    const photos = await photoRepository.find({ relations: ['metadata'] });
+    let photos = await connection
+      .getRepository(Photo)
+      .createQueryBuilder('photo')
+      .innerJoinAndSelect('photo.metadata', 'metadata')
+      .getMany();
   })
   .catch(error => console.log(error));
