@@ -2,25 +2,21 @@ import 'reflect-metadata';
 import { createConnection } from 'typeorm';
 
 import { Photo } from './entity/Photo';
-import { PhotoMetadata } from './entity/PhotoMetadata';
+import { Author } from './entity/Author';
 
 createConnection()
   .then(async connection => {
     let photo = new Photo();
-    photo.name = 'QWE';
+    photo.name = 'new photo';
     photo.description = 'I am near polar bears';
     photo.filename = 'photo-with-bears.jpg';
     photo.isPublished = true;
     photo.views = 10;
 
-    let metadata = new PhotoMetadata();
-    metadata.height = 640;
-    metadata.width = 480;
-    metadata.compressed = true;
-    metadata.comment = 'cybershoot';
-    metadata.orientation = 'portait';
+    let author = new Author();
+    author.name = 'John Doe';
 
-    photo.metadata = metadata;
+    photo.author = author;
 
     let photoRepository = connection.getRepository(Photo);
     await photoRepository.save(photo);
@@ -28,7 +24,7 @@ createConnection()
     let photos = await connection
       .getRepository(Photo)
       .createQueryBuilder('photo')
-      .innerJoinAndSelect('photo.metadata', 'metadata')
+      .innerJoinAndSelect('photo.author', 'author')
       .getMany();
 
     console.warn(photos);

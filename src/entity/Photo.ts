@@ -1,5 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToOne } from 'typeorm';
-import { PhotoMetadata } from './PhotoMetadata';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import { Author } from './Author';
 @Entity()
 export class Photo {
   @PrimaryGeneratedColumn()
@@ -20,8 +20,6 @@ export class Photo {
   @Column()
   isPublished: boolean;
 
-  @OneToOne(type => PhotoMetadata, photoMetadata => photoMetadata.photo, {
-    cascade: true
-  })
-  metadata: PhotoMetadata;
+  @ManyToOne(type => Author, author => author.photos, { cascade: true })
+  author: Author;
 }

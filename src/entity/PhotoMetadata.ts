@@ -20,8 +20,4 @@ export class PhotoMetadata {
 
   @Column()
   comment: string;
-
-  @OneToOne(type => Photo, photo => photo.metadata)
-  @JoinColumn()
-  photo: Photo;
 }
