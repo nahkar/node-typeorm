@@ -13,8 +13,7 @@ const init = async () => {
   }
 
   try {
-    await app.listen(app.get('port'));
-    console.warn(`Server started on port ${process.env.PORT}`);
+    await app.listen(process.env.PORT);
   } catch (err) {
     console.warn(err);
   }

@@ -18,6 +18,7 @@
   "homepage": "https://github.com/nahkar/node-typeorm#readme",
   "dependencies": {
     "apollo-server-express": "^2.3.1",
+    "bcryptjs": "^2.4.3",
     "custom-env": "^1.0.0",
     "dotenv": "^6.2.0",
     "express": "^4.16.4",
@@ -30,6 +31,7 @@
     "typeorm": "0.2.11"
   },
   "devDependencies": {
+    "@types/bcryptjs": "^2.4.2",
     "@types/express": "^4.16.0",
     "@types/graphql": "^14.0.5",
     "@types/node": "^8.0.29",

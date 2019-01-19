@@ -7,25 +7,17 @@ import routes from './routes/v1';
  **/
 
 import { ApolloServer } from 'apollo-server-express';
-import { buildSchema, Resolver, Query } from 'type-graphql';
-
-@Resolver()
-class HelloResolver {
-  @Query(() => String)
-  async hello() {
-    return 'Hello world !';
-  }
-}
+import { buildSchema } from 'type-graphql';
+import { UserResolver } from './modules/user/user.resolver';
 
 const initGraphQL = async (app: Object) => {
   const schema = await buildSchema({
-    resolvers: [HelloResolver]
+    resolvers: [UserResolver]
   });
   const apolloServer = new ApolloServer({ schema });
   apolloServer.applyMiddleware({ app });
 };
 
-app.set('port', process.env.PORT);
 app.use('/v1', routes);
 
 initGraphQL(app);
